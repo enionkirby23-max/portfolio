@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Kirby Alex T. Enion — Network & IT Professional</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<style>
+  :root {
+    --bg: #0a0f1a;
+    --surface: #111827;
+    --border: #1e2d40;
+    --accent: #00d4ff;
+    --accent2: #0066ff;
+    --text: #e8edf5;
+    --muted: #6b7fa3;
+    --green: #00e5a0;
+    --warn: #ff6b35;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1rem 2rem;
+    background: rgba(10,15,26,0.85);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-logo {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.85rem;
+    color: var(--accent);
+    letter-spacing: 0.05em;
+  }
+  .nav-links { display: flex; gap: 2rem; }
+  .nav-links a {
+    font-size: 0.85rem;
+    color: var(--muted);
+    text-decoration: none;
+    letter-spacing: 0.05em;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--accent); }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: flex; flex-direction: column; justify-content: center;
+    padding: 6rem 2rem 4rem;
+    max-width: 900px; margin: 0 auto;
+    position: relative;
+  }
+
+  .hero-tag {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.8rem;
+    color: var(--accent);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: 1.5rem;
+    display: flex; align-items: center; gap: 0.75rem;
+  }
+  .hero-tag::before {
+    content: '';
+    display: inline-block;
+    width: 32px; height: 1px;
+    background: var(--accent);
+  }
+
+  .hero h1 {
+    font-size: clamp(2.2rem, 6vw, 4rem);
+    font-weight: 700;
+    line-height: 1.1;
+    margin-bottom: 1.5rem;
+    letter-spacing: -0.02em;
+  }
+
+  .hero h1 span {
+    background: linear-gradient(135deg, var(--accent), var(--accent2));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .hero-sub {
+    font-size: 1.1rem;
+    color: var(--muted);
+    max-width: 560px;
+    margin-bottom: 2.5rem;
+    line-height: 1.7;
+  }
+
+  .hero-cta {
+    display: flex; gap: 1rem; flex-wrap: wrap;
+  }
+
+  .btn {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    padding: 0.75rem 1.5rem;
+    border-radius: 6px;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 500;
+    text-decoration: none;
+    transition: all 0.2s;
+    cursor: pointer;
+    border: none;
+  }
+  .btn-primary {
+    background: var(--accent);
+    color: var(--bg);
+  }
+  .btn-primary:hover { background: #33ddff; transform: translateY(-1px); }
+  .btn-secondary {
+    background: transparent;
+    color: var(--text);
+    border: 1px solid var(--border);
+  }
+  .btn-secondary:hover { border-color: var(--accent); color: var(--accent); }
+
+  /* STATUS BAR */
+  .status-bar {
+    display: flex; gap: 2rem; flex-wrap: wrap;
+    margin-top: 4rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--border);
+  }
+  .status-item { display: flex; flex-direction: column; gap: 0.25rem; }
+  .status-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+  .status-value {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--text);
+  }
+  .status-dot {
+    display: inline-block;
+    width: 7px; height: 7px;
+    border-radius: 50%;
+    background: var(--green);
+    margin-right: 0.4rem;
+    animation: pulse 2s infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.4; }
+  }
+
+  /* SECTIONS */
+  section {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 5rem 2rem;
+    border-top: 1px solid var(--border);
+  }
+
+  .section-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.75rem;
+    color: var(--accent);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: 0.75rem;
+  }
+
+  .section-title {
+    font-size: clamp(1.5rem, 3vw, 2rem);
+    font-weight: 700;
+    margin-bottom: 2.5rem;
+    letter-spacing: -0.01em;
+  }
+
+  /* SKILLS */
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1rem;
+  }
+
+  .skill-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 1.5rem;
+    transition: border-color 0.2s, transform 0.2s;
+  }
+  .skill-card:hover { border-color: var(--accent); transform: translateY(-2px); }
+
+  .skill-icon {
+    font-size: 1.5rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .skill-card h3 {
+    font-size: 0.95rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    color: var(--text);
+  }
+
+  .skill-tags {
+    display: flex; flex-wrap: wrap; gap: 0.4rem;
+    margin-top: 0.75rem;
+  }
+
+  .tag {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    padding: 0.2rem 0.6rem;
+    border-radius: 4px;
+    background: rgba(0,212,255,0.08);
+    color: var(--accent);
+    border: 1px solid rgba(0,212,255,0.15);
+  }
+
+  /* EXPERIENCE */
+  .exp-list { display: flex; flex-direction: column; gap: 1.5rem; }
+
+  .exp-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--accent);
+    border-radius: 0 10px 10px 0;
+    padding: 1.5rem;
+  }
+
+  .exp-header {
+    display: flex; justify-content: space-between;
+    align-items: flex-start; flex-wrap: wrap; gap: 0.5rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .exp-title { font-weight: 600; font-size: 1rem; }
+  .exp-date {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.75rem;
+    color: var(--muted);
+    white-space: nowrap;
+  }
+  .exp-org { color: var(--accent); font-size: 0.85rem; margin-bottom: 0.75rem; }
+
+  .exp-list-items {
+    list-style: none;
+    display: flex; flex-direction: column; gap: 0.4rem;
+  }
+  .exp-list-items li {
+    font-size: 0.9rem;
+    color: var(--muted);
+    padding-left: 1rem;
+    position: relative;
+  }
+  .exp-list-items li::before {
+    content: '→';
+    position: absolute; left: 0;
+    color: var(--accent);
+    font-size: 0.75rem;
+  }
+
+  /* CERTS */
+  .certs-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1rem;
+  }
+
+  .cert-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 1.25rem;
+    display: flex; gap: 1rem; align-items: flex-start;
+    transition: border-color 0.2s;
+  }
+  .cert-card:hover { border-color: var(--accent); }
+
+  .cert-icon {
+    font-size: 1.5rem;
+    flex-shrink: 0;
+    margin-top: 0.1rem;
+  }
+
+  .cert-name {
+    font-size: 0.9rem;
+    font-weight: 600;
+    margin-bottom: 0.2rem;
+  }
+
+  .cert-issuer {
+    font-size: 0.78rem;
+    color: var(--muted);
+  }
+
+  /* PROJECT */
+  .project-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 2rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .project-card::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--accent), var(--accent2));
+  }
+
+  .project-badge {
+    display: inline-flex; align-items: center; gap: 0.4rem;
+    background: rgba(0,229,160,0.1);
+    border: 1px solid rgba(0,229,160,0.25);
+    color: var(--green);
+    font-size: 0.75rem;
+    font-family: 'JetBrains Mono', monospace;
+    padding: 0.3rem 0.75rem;
+    border-radius: 20px;
+    margin-bottom: 1rem;
+  }
+
+  .project-card h3 {
+    font-size: 1.3rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+  }
+
+  .project-card p {
+    color: var(--muted);
+    font-size: 0.95rem;
+    margin-bottom: 1rem;
+    line-height: 1.7;
+  }
+
+  /* CONTACT */
+  .contact-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1rem;
+  }
+
+  .contact-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 1.25rem;
+    text-decoration: none;
+    color: var(--text);
+    display: flex; align-items: center; gap: 1rem;
+    transition: border-color 0.2s, transform 0.2s;
+  }
+  .contact-card:hover { border-color: var(--accent); transform: translateY(-2px); }
+
+  .contact-icon { font-size: 1.4rem; flex-shrink: 0; }
+  .contact-label { font-size: 0.75rem; color: var(--muted); margin-bottom: 0.1rem; }
+  .contact-value { font-size: 0.9rem; font-weight: 500; }
+
+  /* FOOTER */
+  footer {
+    text-align: center;
+    padding: 2rem;
+    color: var(--muted);
+    font-size: 0.8rem;
+    font-family: 'JetBrains Mono', monospace;
+    border-top: 1px solid var(--border);
+  }
+
+  /* NETWORK BG EFFECT */
+  .hero::after {
+    content: '';
+    position: absolute;
+    top: 0; right: -200px;
+    width: 600px; height: 600px;
+    background: radial-gradient(circle at center, rgba(0,102,255,0.08) 0%, transparent 70%);
+    pointer-events: none;
+    z-index: -1;
+  }
+
+  @media (max-width: 600px) {
+    nav { padding: 1rem; }
+    .nav-links { gap: 1rem; }
+    .status-bar { gap: 1.2rem; }
+    section { padding: 3rem 1.25rem; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <span class="nav-logo">kirby@enion:~$</span>
+  <div class="nav-links">
+    <a href="#skills">Skills</a>
+    <a href="#experience">Experience</a>
+    <a href="#project">Project</a>
+    <a href="#contact">Contact</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-tag">Network & IT Professional</div>
+  <h1>Building reliable<br/><span>networks from the ground up.</span></h1>
+  <p class="hero-sub">
+    Computer Engineering graduate with hands-on experience in structured cabling, LAN/WAN setup, and IT infrastructure support. Based in the Philippines, open to Metro Manila opportunities.
+  </p>
+  <div class="hero-cta">
+    <a href="mailto:kirbyenion.tech@gmail.com" class="btn btn-primary">Get in touch</a>
+    <a href="#experience" class="btn btn-secondary">View experience</a>
+  </div>
+
+  <div class="status-bar">
+    <div class="status-item">
+      <span class="status-label">Status</span>
+      <span class="status-value"><span class="status-dot"></span>Open to work</span>
+    </div>
+    <div class="status-item">
+      <span class="status-label">Location</span>
+      <span class="status-value">Philippines → Metro Manila</span>
+    </div>
+    <div class="status-item">
+      <span class="status-label">Graduation</span>
+      <span class="status-value">July 2026</span>
+    </div>
+    <div class="status-item">
+      <span class="status-label">Certifications</span>
+      <span class="status-value">ITF+ · OCNA · CSE</span>
+    </div>
+  </div>
+</div>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="section-label">Technical Stack</div>
+  <h2 class="section-title">What I work with</h2>
+  <div class="skills-grid">
+    <div class="skill-card">
+      <div class="skill-icon">🌐</div>
+      <h3>Networking</h3>
+      <p style="font-size:0.85rem;color:var(--muted)">LAN/WAN design, IP addressing, subnetting, VLANs, routing and switching fundamentals.</p>
+      <div class="skill-tags">
+        <span class="tag">MikroTik</span>
+        <span class="tag">TP-Link Omada</span>
+        <span class="tag">VLAN</span>
+        <span class="tag">DHCP</span>
+        <span class="tag">DNS</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-icon">🔌</div>
+      <h3>Structured Cabling</h3>
+      <p style="font-size:0.85rem;color:var(--muted)">UTP and fiber optic installation, cable pulling, routing, termination, labeling, and dressing.</p>
+      <div class="skill-tags">
+        <span class="tag">UTP</span>
+        <span class="tag">Fiber Optic</span>
+        <span class="tag">Patch Panels</span>
+        <span class="tag">Racking</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-icon">🖥️</div>
+      <h3>Hardware & Support</h3>
+      <p style="font-size:0.85rem;color:var(--muted)">Computer assembly, OS troubleshooting, printer and PSU repair, end-user support.</p>
+      <div class="skill-tags">
+        <span class="tag">Windows</span>
+        <span class="tag">Assembly</span>
+        <span class="tag">Troubleshooting</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-icon">🔒</div>
+      <h3>Cybersecurity</h3>
+      <p style="font-size:0.85rem;color:var(--muted)">Zero Trust principles, network security fundamentals, firewall basics, VPN concepts.</p>
+      <div class="skill-tags">
+        <span class="tag">Zero Trust</span>
+        <span class="tag">VPN</span>
+        <span class="tag">Firewall</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-icon">⚙️</div>
+      <h3>Programming</h3>
+      <p style="font-size:0.85rem;color:var(--muted)">C++, Java, Arduino microcontroller programming and sensor integration for embedded systems.</p>
+      <div class="skill-tags">
+        <span class="tag">C++</span>
+        <span class="tag">Java</span>
+        <span class="tag">Arduino</span>
+        <span class="tag">IoT</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-icon">☁️</div>
+      <h3>Cloud Fundamentals</h3>
+      <p style="font-size:0.85rem;color:var(--muted)">Azure cloud basics, IaaS vs PaaS, virtualization concepts. Currently preparing for AZ-900.</p>
+      <div class="skill-tags">
+        <span class="tag">Azure</span>
+        <span class="tag">IaaS</span>
+        <span class="tag">PaaS</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="section-label">Work History</div>
+  <h2 class="section-title">Experience</h2>
+  <div class="exp-list">
+    <div class="exp-card">
+      <div class="exp-header">
+        <span class="exp-title">IT Technical Assistant</span>
+        <span class="exp-date">NVSU · 2024–2026</span>
+      </div>
+      <div class="exp-org">Management Information Systems (MIS) Office — Nueva Vizcaya State University</div>
+      <ul class="exp-list-items">
+        <li>Assisted in campus-wide network setup including routers, switches, structured cabling, and access points</li>
+        <li>Performed hardware and software troubleshooting on computers, printers, and peripheral devices</li>
+        <li>Provided first-level IT support, resolving connectivity and system issues</li>
+        <li>Supported audio-visual systems and IT logistics during university-wide events</li>
+      </ul>
+    </div>
+    <div class="exp-card">
+      <div class="exp-header">
+        <span class="exp-title">Technical Member</span>
+        <span class="exp-date">ICpEP.SE · 2023–2026</span>
+      </div>
+      <div class="exp-org">Institute of Computer Engineers of the Philippines – Student Edition, NVSU Bambang</div>
+      <ul class="exp-list-items">
+        <li>Collaborated on IT seminars, workshops, and engineering events</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECT -->
+<section id="project">
+  <div class="section-label">Featured Work</div>
+  <h2 class="section-title">Key Project</h2>
+  <div class="project-card">
+    <div class="project-badge">🏆 Best Research Paper — 1st Place, Regional Level 2026</div>
+    <h3>Lumolane</h3>
+    <p>An IoT-based road safety system designed to enhance visibility on curves and blind spots using Arduino microcontrollers and sensor arrays. Led the full project as Team Leader — from hardware integration and system architecture design to end-to-end testing and deployment.</p>
+    <div class="skill-tags">
+      <span class="tag">Arduino</span>
+      <span class="tag">IoT</span>
+      <span class="tag">Sensor Integration</span>
+      <span class="tag">Embedded Systems</span>
+      <span class="tag">Team Lead</span>
+    </div>
+  </div>
+</section>
+
+<!-- CERTS -->
+<section id="certs">
+  <div class="section-label">Credentials</div>
+  <h2 class="section-title">Certifications</h2>
+  <div class="certs-grid">
+    <div class="cert-card">
+      <div class="cert-icon">🎖️</div>
+      <div>
+        <div class="cert-name">CompTIA IT Fundamentals+ (ITF+)</div>
+        <div class="cert-issuer">CompTIA · May 2025</div>
+      </div>
+    </div>
+    <div class="cert-card">
+      <div class="cert-icon">🌐</div>
+      <div>
+        <div class="cert-name">Omada Certified Network Administrator</div>
+        <div class="cert-issuer">TP-Link · October 2025</div>
+      </div>
+    </div>
+    <div class="cert-card">
+      <div class="cert-icon">🏛️</div>
+      <div>
+        <div class="cert-name">Civil Service Examination — Professional Level</div>
+        <div class="cert-issuer">Civil Service Commission · May 2025</div>
+      </div>
+    </div>
+    <div class="cert-card">
+      <div class="cert-icon">⛑️</div>
+      <div>
+        <div class="cert-name">BOSH — Safety Officer 1</div>
+        <div class="cert-issuer">DOLE-Accredited · May 2025</div>
+      </div>
+    </div>
+    <div class="cert-card">
+      <div class="cert-icon">🔐</div>
+      <div>
+        <div class="cert-name">Introduction to Cybersecurity</div>
+        <div class="cert-issuer">Cisco Networking Academy</div>
+      </div>
+    </div>
+    <div class="cert-card">
+      <div class="cert-icon">📡</div>
+      <div>
+        <div class="cert-name">Networking Basics</div>
+        <div class="cert-issuer">Cisco Networking Academy</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-label">Get in touch</div>
+  <h2 class="section-title">Contact</h2>
+  <div class="contact-grid">
+    <a href="mailto:kirbyenion.tech@gmail.com" class="contact-card">
+      <span class="contact-icon">✉️</span>
+      <div>
+        <div class="contact-label">Email</div>
+        <div class="contact-value">kirbyenion.tech@gmail.com</div>
+      </div>
+    </a>
+    <a href="tel:+639760787512" class="contact-card">
+      <span class="contact-icon">📱</span>
+      <div>
+        <div class="contact-label">Phone</div>
+        <div class="contact-value">+63 976 078 7512</div>
+      </div>
+    </a>
+    <a href="https://linkedin.com/in/kirby-alex-enion-862860409" target="_blank" class="contact-card">
+      <span class="contact-icon">💼</span>
+      <div>
+        <div class="contact-label">LinkedIn</div>
+        <div class="contact-value">kirby-alex-enion</div>
+      </div>
+    </a>
+  </div>
+</section>
+
+<footer>
+  <p>kirby alex t. enion · computer engineering · philippines · 2026</p>
+</footer>
+
+</body>
+</html>
